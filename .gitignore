@@ -120,8 +120,8 @@ celerybeat.pid
 # Environments
 .env
 .venv
-env/
-venv/
+/stripe_backend/env/
+/stripe_backend/venv/
 ENV/
 env.bak/
 venv.bak/
@@ -160,7 +160,7 @@ cython_debug/
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/stripe_frontend/node_modules
 /.pnp
 .pnp.js
 
