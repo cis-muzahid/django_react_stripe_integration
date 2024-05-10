@@ -20,7 +20,7 @@ The steps involved to get this to work are:
 -   Open backend/core/settings.py
 -   Find the STRIPE_SECRET_KEY setting and paste your key in here
 -   Click on "Products" and create a product
--   Copy the price ID, go into frontend/src/HomePage.js and paste it where you see "product_id_xxx"
+-   create a subscription plan from frontend/src/HomePage.js and then checkout product to add payments
 
 ### For backend Setup 
 - follow backend/README.md file for setup - 

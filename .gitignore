@@ -163,6 +163,10 @@ cython_debug/
 /stripe_frontend/node_modules
 /.pnp
 .pnp.js
+stripe_frontend/node_modules/
+stripe_backend/venv
+stripe_backend/db
+
 
 # testing
 /coverage

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'payments',
+    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -135,9 +136,10 @@ REST_FRAMEWORK = {
 
 SITE_URL = 'http://localhost:3000'
 
-# STRIPE_SECRET_KEY = 
 STRIPE_SECRET_KEY = 'sk_test_'
-
+# STRIPE_SECRET_KEY = 'sk_test_'
+PAYMENT_SUCCESS_URL = 'http://localhost:3000/success'
+PAYMENT_CANCEL_URL = 'http://localhost:3000/cancel'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

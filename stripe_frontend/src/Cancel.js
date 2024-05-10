@@ -4,7 +4,7 @@
   const Cancel = () =>  {
 	return (
 	  <div>
-        <h5>Payement cancelled check process</h5>
+        <h5>Payment cancelled check process</h5>
 	  </div>
 	);
   }

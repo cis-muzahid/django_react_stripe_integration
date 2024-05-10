@@ -1,43 +1,31 @@
-.product {
+.subscription-plans-container {
 	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	width: 480px;
-	height: 150px;
-	background-color: rgba(0, 0, 0, 0.1);
-	margin-top: 50px;
-	margin-left: 50px;
-	margin-bottom: 10px;
-	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
-}
-
-.product img {
-	width: 200px;
-	height: 150px;
-}
-
-.description h3 {
-	font-size: 24px;
-	padding-right: 20px;
-}
-
-.description h5 {
-	font-size: 18px;
-	font-size: 200;
-}
-
-.button {
-	font-size: 18px;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin-top: 20px;
+  }
+  
+  .product {
+	width: 30%; /* Adjust width as needed for three plans in a row */
+	margin-bottom: 20px;
+  }
+  
+  .card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	padding: 10px;
-	background-color: #556cd6;
-	color: white;
-	border: none;
-	margin-left: 50px;
-	width: 480px;
-	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
-}
-
-.button:hover {
-	cursor: pointer;
-	opacity: 0.9;
-}
+	border: 1px solid #ccc;
+	border-radius: 5px;
+  }
+  
+  .card img {
+	width: 100px;
+	height: 100px;
+	margin-bottom: 10px;
+  }
+  
+  .card button {
+	margin-top: 10px;
+  }
+  
