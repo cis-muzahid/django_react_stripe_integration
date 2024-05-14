@@ -23,9 +23,9 @@ The steps involved to get this to work are:
 -   create a subscription plan from frontend/src/HomePage.js and then checkout product to add payments
 
 ### For backend Setup 
-- follow backend/README.md file for setup - 
+- follow stripe_backend/README.md file for setup - 
 
 ### For frontend Setup 
-- follow frontend/README.md file for setup - 
+- follow stripe_frontend/README.md file for setup - 
 
 

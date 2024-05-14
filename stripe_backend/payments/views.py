@@ -11,30 +11,30 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class CreateSubscriptionSessionView(generics.ListCreateAPIView):
     """
-    Creation and list of subscription plan and products
+    API view for creating and listing subscription plans and products.
     """
     queryset = SubscriptionPlan.objects.all()
     serializer_class = SubscriptionPlanSerializer 
 
     def get(self, request, *args, **kwargs):
+        """
+        Handles GET requests to list subscription plans and products.
+        """
         try:
-            queryset = self.get_queryset()  # Retrieve the queryset
+            queryset = self.get_queryset()
             serializer = self.get_serializer(queryset, many=True)
-            # return Response(serializer.data, status=status.HTTP_200_OK)
             return Response({'data': serializer.data}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def post(self, request, *args, **kwargs):
-        
+        """
+        Handles POST requests to create a new subscription plan.
+        """  
         stripe.api_key = settings.STRIPE_SECRET_KEY
         try:
-            print("request.data",request.data)
-            # Assuming you have a serializer to handle incoming data for creating a new plan
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
-            
-            # Create a new subscription plan based on the validated serializer data
             subscription = serializer.save()
 
             # Retrieve account details from Stripe
@@ -42,8 +42,6 @@ class CreateSubscriptionSessionView(generics.ListCreateAPIView):
 
             # Determine currency based on account country
             currency = 'inr' if account.country == 'IN' else 'usd'
-
-            # Create or retrieve the Stripe product for the subscription
             product = subscription.create_or_retrieve_stripe_product()
 
             # Create the Stripe price for the subscription plan
@@ -64,17 +62,22 @@ class CreateSubscriptionSessionView(generics.ListCreateAPIView):
                 success_url=settings.PAYMENT_SUCCESS_URL,
                 cancel_url=settings.PAYMENT_CANCEL_URL,
             )
-
-            # Return the checkout session ID in the response
             return Response({'success': True, 'checkout_session_id': checkout_session.id}, status=status.HTTP_201_CREATED)
         except stripe.error.StripeError as e:
-            # Handle Stripe errors
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class StripeCheckoutView(APIView):
+    """
+    API view for creating a Stripe checkout session.
+
+    This view handles the creation of a checkout session for Stripe subscriptions.
+    """
     def post(self, request):
+        """
+        Handles POST requests for creating a Stripe checkout session.
+        """
         try:
-            stripe.api_key = settings.STRIPE_SECRET_KEY  # Set your Stripe secret key here
+            stripe.api_key = settings.STRIPE_SECRET_KEY
 
             price_id = request.data.get('price_id')  
             checkout_session = stripe.checkout.Session.create(
@@ -87,7 +90,6 @@ class StripeCheckoutView(APIView):
                 payment_method_types=['card',],
                 mode='subscription',
                 success_url=settings.SITE_URL + '/?success=true&session_id={CHECKOUT_SESSION_ID}',
-                # create
                 cancel_url=settings.SITE_URL + '/?canceled=true',
             )
              

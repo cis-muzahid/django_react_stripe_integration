@@ -36,6 +36,9 @@ class SubscriptionPlan(TimeStampedModel):
         return f"{self.plan_name}"
 
     def create_or_retrieve_stripe_product(self):
+        """
+        Creates a new Stripe product if it doesn't exist or retrieves an existing product.
+        """
         stripe.api_key = settings.STRIPE_SECRET_KEY
         try:
             product = stripe.Product.retrieve(self.plan_name)
@@ -44,6 +47,9 @@ class SubscriptionPlan(TimeStampedModel):
         return product
 
     def create_stripe_price(self, product_id, currency):
+        """
+        Creates a new Stripe price for a given product ID and currency.
+        """
         stripe.api_key = settings.STRIPE_SECRET_KEY
         price = stripe.Price.create(
             product=product_id,
