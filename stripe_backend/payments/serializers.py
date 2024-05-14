@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 class SubscriptionPlanSerializer(serializers.ModelSerializer):
     """
-    Serializer for the SubscriptionPlan model.
+    Serializer  for the SubscriptionPlan model.
 
     This serializer is used to serialize and deserialize SubscriptionPlan objects.
     It maps the SubscriptionPlan model fields to JSON fields.

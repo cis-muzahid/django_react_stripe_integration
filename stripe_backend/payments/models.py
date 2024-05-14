@@ -7,7 +7,7 @@ import stripe
 
 
 class TimeStampedModel(models.Model):
-    """TimeStampedModel model for created and modified date."""
+    """ TimeStampedModel model for created and modified date."""
 
     created_date = models.DateTimeField(auto_now_add=True, null=True)
     modified_date = models.DateTimeField(auto_now=True, null=True)
