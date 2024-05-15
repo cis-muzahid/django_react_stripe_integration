@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'payments',
+    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -134,12 +139,11 @@ REST_FRAMEWORK = {
 }
 
 SITE_URL = 'http://localhost:3000'
-
-# STRIPE_SECRET_KEY = 
-STRIPE_SECRET_KEY = 'sk_test_'
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+PAYMENT_SUCCESS_URL = os.environ.get('PAYMENT_SUCCESS_URL')
+PAYMENT_CANCEL_URL = os.environ.get('PAYMENT_CANCEL_URL')
